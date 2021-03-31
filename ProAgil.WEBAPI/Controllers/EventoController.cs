@@ -92,6 +92,7 @@ namespace ProAgil.WEBAPI.Controllers
                 if(evento == null) return NotFound();
 
                 _repo.Update(model);
+                
 
                 if(await _repo.SaveChangesAsync())
                 {
