@@ -1,12 +1,14 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService  } from 'ngx-bootstrap/modal';
 import { Evento } from '../_models/Evento';
 import { EventoService } from '../_services/evento.service';
 import { Validators } from '@angular/forms';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
-import {  BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
+
 defineLocale('pt-br', ptBrLocale); 
 
 @Component({
@@ -15,6 +17,9 @@ defineLocale('pt-br', ptBrLocale);
   styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
+
+  titulo = 'Eventos';
+
   eventosFiltrados: Evento[];
   eventos: Evento[];
   evento: Evento;
@@ -29,12 +34,13 @@ export class EventosComponent implements OnInit {
   _filtroLista: string;
 
   constructor(private eventoService: EventoService
-              ,private modalService: BsModalService
-              ,private fb: FormBuilder
-              ,private localService: BsLocaleService
+              , private modalService: BsModalService
+              , private fb: FormBuilder
+              , private localeService: BsLocaleService 
+              , private toastr: ToastrService
             ) 
   {
-    this.localService.use('pt-br');
+    this.localeService.use('pt-br');
   }
 
   get filtroLista(): string{
@@ -74,7 +80,7 @@ export class EventosComponent implements OnInit {
     console.log(evento);
   }
 
-  excluirEvento(evento: Evento, template: any){
+  excluirEvento(evento: Evento, template: any){    
     this.openModal(template);
     this.evento = evento;
     this.bodyDeletarEvento = `Tem certeza que deseja excluir o Evento: ${evento.tema}, Código: ${evento.id}`;
@@ -95,8 +101,10 @@ export class EventosComponent implements OnInit {
           console.log(novoEvento);
           template.hide();
           this.getEventos();
+          this.toastr.success('Inserido com Sucesso');
         }, error => {
             console.log(error);
+            this.toastr.error(`Erro ao tentar inserir: ${error}`);
           }
         );
       } else {
@@ -107,8 +115,10 @@ export class EventosComponent implements OnInit {
         () => {
           template.hide();
           this.getEventos();
+          this.toastr.success('Alterado com Sucesso');
         }, error => {
             console.log(error);
+            this.toastr.error(`Erro ao tentar alterar: ${error}`);
           }
         );
       }      
@@ -120,8 +130,10 @@ export class EventosComponent implements OnInit {
       () => {
         template.hide();
         this.getEventos();
+        this.toastr.success('Deletado com Sucesso');
       }, error => {
         console.log(error);
+        this.toastr.error('Erro ao tentar deletar');
       }
     );
   }
@@ -130,7 +142,7 @@ export class EventosComponent implements OnInit {
     this.registerForm = this.fb.group({
       tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
       local: ['', [Validators.required, Validators.maxLength(50)]],
-      dataEvento: ['', Validators.required],
+      dataEvento: ['', [Validators.required]],
       imagemURL: ['', Validators.required],
       qtdPessoas: ['', [Validators.required, Validators.max(1500)]],
       telefone: ['', Validators.required],
@@ -146,6 +158,7 @@ export class EventosComponent implements OnInit {
        this.eventosFiltrados = this.eventos;
     }, error => {
       console.log(error);
+      this.toastr.error(`Erro ao tentar carregar: ${error}`);
       });
   }
 

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +31,7 @@ namespace ProAgil.WEBAPI.Controllers
             try 
             {
                 var eventos = await _repo.GetAllEventosAsync(true);
-
+                
                 var result = _mapper.Map<EventoDto[]>(eventos);
 
                 return Ok(result);
@@ -48,7 +50,7 @@ namespace ProAgil.WEBAPI.Controllers
             {
                 var evento = await _repo.GetEventoAsyncById(EventoId, true);
 
-                var result = _mapper.Map<EventoDto>(evento);
+                var result = _mapper.Map<EventoDto>(evento);                
 
                 return Ok(result);
             }    

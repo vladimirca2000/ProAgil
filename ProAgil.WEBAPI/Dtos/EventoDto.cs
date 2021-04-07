@@ -12,6 +12,8 @@ namespace ProAgil.WEBAPI.Dtos
         [Required(ErrorMessage="Local deve ser preenchido")]
         [StringLength(150, MinimumLength=3, ErrorMessage="Local deve ter entre 3 e 150 caracter")]
         public string Local { get; set; }
+
+        
         public string DataEvento { get;  set; }
 
         [Required(ErrorMessage="O tema deve ser preenchido")]
