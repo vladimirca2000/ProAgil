@@ -75,7 +75,7 @@ namespace ProAgil.WEBAPI.Controllers
             
             return BadRequest("Erro ao tentar realizar upload");
         }
-
+        
         [HttpGet("{EventoId}")]
         public async Task<IActionResult> Get(int EventoId)
         {
