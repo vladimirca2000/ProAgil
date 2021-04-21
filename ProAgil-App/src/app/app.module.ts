@@ -9,7 +9,8 @@ import { BsDropdownModule, BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxFontAwesomeModule } from 'ngx-font-awesome';
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskModule } from 'ngx-mask';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -60,6 +61,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     BsDatepickerModule.forRoot(),
     NgxMaskModule.forRoot(),
     NgxFontAwesomeModule,
+    NgxCurrencyModule,
     AppRoutingModule,
     HttpClientModule
     

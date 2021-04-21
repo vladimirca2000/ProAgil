@@ -167,8 +167,7 @@
                 </div>
                 <div class="form-group col-md-8">
                   <label>Link</label>
-                  <input type="text" prefix="http://" mask=""
-                    [ngClass]="{'is-invalid': redesSociais.get(j+'.url').errors && redesSociais.get(j+'.url').touched}"
+                  <input type="text" mask="" prefix="http://" [ngClass]="{'is-invalid': redesSociais.get(j+'.url').errors && redesSociais.get(j+'.url').touched}"
                     formControlName="url" class="form-control" placeholder="URL">
                 </div>
               </div>
@@ -218,16 +217,13 @@
             <small class="text-muted">{{evento.qtdPessoas}}</small>
           </p>
           <div class="row">
-            <div class="icon-block col-md-8 iconesSociais">              
-              <a href="{{ redesSociais.get(l+'.url').value }}"
-                *ngFor="let redeSocial of redesSociais.controls; let l=index;" class="mr-3" target="_blank">
-                <i class="{{ redesSociais.get(l+'.nome').value }}"></i>
-              </a>
+            <div class="icon-block col-md-8 iconesSociais">  
+              <a href="{{redesSociais.get(l+'.url').value }}"
+              *ngFor="let redeSocial of redesSociais.controls; let l=index;" class="mr-3" target="_blank">
+              <i class="{{ redesSociais.get(l+'.nome').value }}"></i>
+            </a>
             </div>
-            <!--div class="col-md-4 d-flex justify-content-center">
-              <a href="#" class="btn btn-outline-primary">Participar</a>
-            </div-->
-          </div>
+          </div>          
         </div>
       </div>
     </div>

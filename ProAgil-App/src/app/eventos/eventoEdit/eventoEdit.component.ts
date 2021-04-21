@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventoService } from 'src/app/_services/evento.service';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/_models/Evento';
 import { ActivatedRoute } from '@angular/router';
